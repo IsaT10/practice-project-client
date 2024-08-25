@@ -3,6 +3,7 @@ import { sidebarItemsGenerator } from '../../utils/sidebarItemsGenerator';
 import { adminPaths } from '../../routes/admin.routes';
 import { facultyPaths } from '../../routes/faculty.routes';
 import { studentPaths } from '../../routes/student.routes';
+import { useAppSelector } from '../../redux/hooks';
 const { Sider } = Layout;
 
 const userRole = {
@@ -11,10 +12,11 @@ const userRole = {
   STUDENT: 'student',
 };
 export default function Sidebar() {
-  const role = 'admin';
+  const { user } = useAppSelector((state) => state.auth);
+
   let sidebarItems;
 
-  switch (role) {
+  switch (user!.role) {
     case userRole.ADMIN:
       sidebarItems = sidebarItemsGenerator(adminPaths, 'admin');
       break;
@@ -30,7 +32,11 @@ export default function Sidebar() {
   }
 
   return (
-    <Sider breakpoint='lg' collapsedWidth='0'>
+    <Sider
+      breakpoint='lg'
+      collapsedWidth='0'
+      style={{ height: '100vh', position: 'sticky', top: 0, left: 0 }}
+    >
       <div className='demo-logo-vertical'>
         <h1
           style={{
