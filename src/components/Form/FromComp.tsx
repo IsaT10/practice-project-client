@@ -32,9 +32,13 @@ export default function FromComp({
   }
 
   const methods = useForm(formConfig);
+  const handleSubmit = (data: FieldValues) => {
+    onSubmit(data);
+    // methods.reset();
+  };
   return (
     <FormProvider {...methods}>
-      <Form layout='vertical' onFinish={methods.handleSubmit(onSubmit)}>
+      <Form layout='vertical' onFinish={methods.handleSubmit(handleSubmit)}>
         {children}
       </Form>
     </FormProvider>

@@ -1,6 +1,6 @@
 import AdminDashboard from '../pages/admin/AdminDashboard';
-import CreateAdmin from '../pages/admin/CreateAdmin';
-import CreateFaculty from '../pages/admin/CreateFaculty';
+import CreateAdmin from '../pages/admin/UserManagement/CreateAdmin';
+import CreateFaculty from '../pages/admin/UserManagement/CreateFaculty';
 
 export const studentPaths = [
   { name: 'Dashboard', path: 'dashboard', element: <AdminDashboard /> },
