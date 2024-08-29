@@ -20,12 +20,14 @@ import {
 import { toast } from 'sonner';
 import { TErrorResponse } from '../../../types';
 import { useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 export default function StudentUpdate() {
   const { studentId } = useParams();
   const { data, isFetching } = useGetSingleStudentQuery(studentId);
 
   console.log(data?.data?.academicDepartment?._id);
+
   const obj = {
     name: {
       firstName: data?.data?.name.firstName,
@@ -34,7 +36,7 @@ export default function StudentUpdate() {
       // middleName can be added if available
     },
     gender: data?.data?.gender,
-    // dateOfBirth is omitted as requested
+    dateOfBirth: dayjs(data?.data?.dateOfBirth),
     bloodGroup: data?.data?.bloodGroup,
     email: data?.data?.email,
     contactNo: data?.data?.contactNo,
@@ -58,6 +60,8 @@ export default function StudentUpdate() {
     admissionSemester: data?.data?.admissionSemester?._id,
     academicDepartment: data?.data?.academicDepartment?._id,
   };
+
+  console.log(obj);
 
   const [updateStudent] = useUpdateStudentMutation();
   const { data: semesterData, isLoading: sisLoading } =

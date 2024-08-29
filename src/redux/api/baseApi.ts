@@ -70,6 +70,6 @@ const customBaseQuery: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: 'baseApi',
   baseQuery: customBaseQuery,
-
+  tagTypes: ['semesterRegistration', 'course'],
   endpoints: () => ({}),
 });

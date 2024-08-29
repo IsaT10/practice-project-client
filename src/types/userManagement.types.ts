@@ -23,6 +23,7 @@ export type TLocalGuardian = {
 
 export type TName = {
   firstName: string;
+  middleName?: string;
   lastName: string;
   _id: string;
 };
@@ -43,6 +44,27 @@ export type TStudent = {
   localGuardian: TLocalGuardian;
   profileImg: string;
   admissionSemester: TAcademicSemester;
+  academicDepartment: TAcademicDepartment;
+  isDeleted: boolean;
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  fullName: string;
+};
+
+export type TFaculty = {
+  id: string;
+  name: TName;
+  user: string;
+  gender: string;
+  dateOfBirth: string;
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  bloodGroup: string;
+  presentAddress: string;
+  permanentAddress: string;
+  profileImg: string;
   academicDepartment: TAcademicDepartment;
   isDeleted: boolean;
   _id: string;

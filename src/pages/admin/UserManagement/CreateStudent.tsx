@@ -5,17 +5,11 @@ import { Controller, FieldValues } from 'react-hook-form';
 import FormSelect from '../../../components/Form/FormSelect';
 import { bloodGroupOptions, genderOptions } from '../../../constans/user';
 import FormDatePicker from '../../../components/Form/FormDatePicker';
-import {
-  TAcademicDepartment,
-  TAcademicSemester,
-} from '../../../types/academicManagement.types';
-import {
-  useGetAllAcademicDepartmentQuery,
-  useGetAllSemsterQuery,
-} from '../../../redux/features/admin/academicManagement.api';
 import { useAddStudentMutation } from '../../../redux/features/admin/userManagement.api';
 import { toast } from 'sonner';
 import { TErrorResponse } from '../../../types';
+import useSemester from '../../../hooks/useSemester';
+import useDepartment from '../../../hooks/useDepartment';
 
 //! this is for development
 //! should be removed
@@ -56,21 +50,24 @@ const studentDefaultValues = {
 
 export default function CreateStudent() {
   const [AddStudent] = useAddStudentMutation();
-  const { data: semesterData, isLoading: sisLoading } =
-    useGetAllSemsterQuery(undefined);
-  const { data: departmentData, isLoading: disLoading } =
-    useGetAllAcademicDepartmentQuery(undefined);
+  // const { data: semesterData, isLoading: sisLoading } =
+  //   useGetAllSemsterQuery(undefined);
 
-  const semesterOptions = semesterData?.data?.map(
-    (item: TAcademicSemester) => ({
-      value: item._id,
-      label: `${item.name} (${item.year})`,
-    })
-  );
+  const { semesterOptions, sisLoading } = useSemester();
+  const { departmentOptions, disLoading } = useDepartment();
+  // const { data: departmentData, isLoading: disLoading } =
+  // useGetAllAcademicDepartmentQuery(undefined);
 
-  const departmentOptions = departmentData?.data?.map(
-    (item: TAcademicDepartment) => ({ value: item._id, label: item.name })
-  );
+  // const semesterOptions = semesterData?.data?.map(
+  //   (item: TAcademicSemester) => ({
+  //     value: item._id,
+  //     label: `${item.name} (${item.year})`,
+  //   })
+  // );
+
+  // const departmentOptions = departmentData?.data?.map(
+  //   (item: TAcademicDepartment) => ({ value: item._id, label: item.name })
+  // );
 
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading('Creating...');

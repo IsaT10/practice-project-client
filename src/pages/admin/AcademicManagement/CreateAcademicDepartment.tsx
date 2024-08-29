@@ -8,10 +8,10 @@ import { academicDepartmentSchema } from '../../../schemas/academicManagementSch
 import FormInput from '../../../components/Form/FormInput';
 import { useCreateAcademicDepartmentMutation } from '../../../redux/features/admin/academicManagement.api';
 import FormSelect from '../../../components/Form/FormSelect';
-import useFacultyOptions from '../../../hooks/useFacultyOptions';
+import useFaculty from '../../../hooks/useFaculty';
 
 export default function CreateAcademicDepartment() {
-  const facultyOptions = useFacultyOptions();
+  const { academicFacultyOptions, fisLoading } = useFaculty();
 
   const [CreateAcademicFaculty] = useCreateAcademicDepartmentMutation();
   const onSubmit = async (data: FieldValues) => {
@@ -45,7 +45,8 @@ export default function CreateAcademicDepartment() {
           <FormSelect
             name='academicFaculty'
             label='Academic Faculty'
-            options={facultyOptions}
+            options={academicFacultyOptions}
+            disabled={fisLoading}
           />
           <Button htmlType='submit'>Send</Button>
         </FromComp>

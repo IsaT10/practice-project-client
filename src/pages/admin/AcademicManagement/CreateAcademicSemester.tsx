@@ -26,7 +26,6 @@ export default function CreateAcademicSemester() {
 
     try {
       const res = await createAcademicSemester(semesterData).unwrap();
-      console.log(res);
       toast.success(res?.message, { id: toastId });
     } catch (error) {
       const typedError = error as TErrorResponse;

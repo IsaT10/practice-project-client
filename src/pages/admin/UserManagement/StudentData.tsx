@@ -17,6 +17,8 @@ export default function StudentData() {
     { name: 'page', value: page },
     ...params,
   ]);
+
+  console.log(studentData?.data);
   const tableData = studentData?.data?.map(
     ({ _id, fullName, id, contactNo, email }) => ({
       key: _id,
